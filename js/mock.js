@@ -10,18 +10,18 @@ const PhotoDescriptions = [
   'Very gorgeous; I am falling in love with this snap of you.',
   'Your smile is wow',
   'Dashing look',
-  'Hey, you are breaking the internet'
+  'Hey, you are breaking the internet',
 ];
 
 const PhotoLikes = {
   MIN: 15,
-  MAX: 200
+  MAX: 200,
 };
 
 const Comments = {
   ID_FROM: 1,
   ID_TO: 1000,
-  AUTHORS: [ 'Monica', 'Phoebe', 'Ross', 'Chandler', 'Rachel', 'Joey'],
+  AUTHORS: ['Monica', 'Phoebe', 'Ross', 'Chandler', 'Rachel', 'Joey'],
   COMMENTS: [
     'Всё отлично!',
     'В целом всё неплохо. Но не всё.',
@@ -37,12 +37,12 @@ const Comments = {
   },
   get RANDOM_ID() {
     return getRandomNumber(this.ID_FROM, this.ID_TO);
-  }
+  },
 };
 
 const CommentsLength = {
   MIN: 0,
-  MAX: 3
+  MAX: 10,
 };
 
 const generateComment = () => ({
@@ -52,7 +52,6 @@ const generateComment = () => ({
   name: getRandomArrayElement(Comments.AUTHORS),
 });
 
-
 let photoId = 0;
 
 const generatePhotoDesc = () => ({
@@ -60,10 +59,13 @@ const generatePhotoDesc = () => ({
   url: `photos/${photoId}.jpg`,
   description: getRandomArrayElement(PhotoDescriptions),
   likes: getRandomNumber(PhotoLikes.MIN, PhotoLikes.MAX),
-  comments: Array.from({length: getRandomNumber(CommentsLength.MIN, CommentsLength.MAX)}, generateComment),
+  comments: Array.from(
+    { length: getRandomNumber(CommentsLength.MIN, CommentsLength.MAX) },
+    generateComment
+  ),
 });
 
-const usersData = Array.from( {length: MAX_DATA_LENGTH}, generatePhotoDesc);
+const usersData = Array.from({ length: MAX_DATA_LENGTH }, generatePhotoDesc);
 
 
 export { usersData };
